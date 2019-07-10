@@ -2,7 +2,6 @@
   "version": 2,
   "name": "my-express-project",
   "builds": [{
-    "src": "/*",
-    "dest": "index.js" 
+    "src": "/*"
   }]
 }

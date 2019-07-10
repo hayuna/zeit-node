@@ -1,6 +1,8 @@
-const mongoose = require('mongoose')
-
-const MONGO_URL = 'mongodb://admin:admin123@ds231537.mlab.com:31537/bridgeit';
+import mongoose from 'mongoose'
+import cors from 'cors'
+import helmet from 'helmet'
+import morgan from 'morgan'
+import bodyParser from 'body-parser'
 
 const setHeaders = res => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -9,20 +11,17 @@ const setHeaders = res => {
     res.setHeader('Access-Control-Allow-Credentials', true);
 }
 
-const isEmpty = req => {
-    return req.body.length === 0 || req.body.length === undefined
-}
-
 const mongo_connect = () => {
+    const MONGO_URL = 'mongodb://admin:admin123@ds231537.mlab.com:31537/bridgeit';
     mongoose.set('useCreateIndex', true);
     mongoose.connect(MONGO_URL, { useNewUrlParser: true })
 }
 
 const useMiddleware = app => {
-    app.use(require('cors')())
-    app.use(require('helmet')())
-    app.use(require('morgan')('dev'))
-    app.use(require('body-parser').json())
+    app.use(cors())
+    app.use(helmet())
+    app.use(morgan('dev'))
+    app.use(bodyParser.json())
 }
 
-module.exports = {setHeaders, isEmpty, mongo_connect, useMiddleware}
+export default { setHeaders, mongo_connect, useMiddleware }

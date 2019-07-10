@@ -1,15 +1,16 @@
-const router = require('express-promise-router')()
+import expressPromiseRouter from 'express-promise-router'
 
-const Controller = require('../controllers/test')
-const { validateParam, validateBody, schemas } = require('../helpers/routeHelpers')
+import Controller from '../controllers/test'
+import { validateParam, validateBody, schema } from '../helpers/routeHelpers'
 
+const router = expressPromiseRouter()
 router.route('/')
     .get(Controller.index)
-    .post(validateBody(schemas.test.post), Controller.new)
+    .post(validateBody(schema.test.post), Controller.add)
 
 router.route('/:id')
-    .get(validateParam(schemas.id, 'id'), Controller.get)
-    .put([validateParam(schemas.id, 'id'), validateBody(schemas.test.put)], Controller.replace)
-    .patch([validateParam(schemas.id, 'id'), validateBody(schemas.test.patch)], Controller.update)
+    .get(validateParam(schema.id, 'id'), Controller.get)
+    .put([validateParam(schema.id, 'id'), validateBody(schema.test.put)], Controller.replace)
+    .patch([validateParam(schema.id, 'id'), validateBody(schema.test.patch)], Controller.update)
 
-module.exports = router
+export default router

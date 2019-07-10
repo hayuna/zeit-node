@@ -2,7 +2,6 @@ import Test from '../models/test'
 
 const index = async (req, res) => {
     const tests = await Test.find({})
-    console.log(tests)
     res.status(200).json(tests)
 }
 

@@ -31,4 +31,8 @@ const update = async (req, res) => {
     res.status(200).json({ success: true })
 }
 
-export default { index, get, update, add, replace }
+const m123 = async (req, res) => {
+    res.status(200).json({ message: 'test method123' })
+}
+
+export default { index, get, update, add, replace, m123 }
